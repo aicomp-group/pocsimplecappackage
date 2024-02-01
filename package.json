@@ -4,7 +4,7 @@
   "description": "A simple CAP project.",
   "repository": "<Add your repository here>",
   "license": "UNLICENSED",
-  "private": true,
+  "private": false,
   "publishConfig": {
     "@aicomp-group:registry": "https://npm.pkg.github.com"
   },
