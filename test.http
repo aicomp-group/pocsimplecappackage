@@ -1,0 +1,1 @@
+http://localhost:4004/odata/v4/service/calculation/calculateValue(number1=5,number2=7,operation='*')
