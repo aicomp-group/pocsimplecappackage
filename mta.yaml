@@ -1,0 +1,54 @@
+_schema-version: '3.1'
+ID: aicomp-group.pocsimplecappackage
+version: 1.0.0
+description: "A simple CAP project."
+parameters:
+  enable-parallel-deployments: true
+build-parameters:
+  before-all:
+    - builder: custom
+      commands:
+        - npx cds build --production
+modules:
+  - name: pocsimplecappackage-srv
+    type: nodejs
+    path: gen/srv
+    parameters:
+      buildpack: nodejs_buildpack
+      disk-quota: 254M
+      memory: 254M
+    build-parameters:
+      builder: npm
+    provides:
+      - name: srv-api # required by consumers of CAP services (e.g. approuter)
+        properties:
+          srv-url: ${default-url}
+    requires:
+      - name: pocsimplecappackage-db
+      - name: pocsimplecappackage-auth
+
+  - name: pocsimplecappackage-db-deployer
+    type: hdb
+    path: gen/db
+    parameters:
+      buildpack: nodejs_buildpack
+      disk-quota: 128M
+      memory: 128M
+    requires:
+      - name: pocsimplecappackage-db
+
+resources:
+  - name: pocsimplecappackage-db
+    type: com.sap.xs.hdi-container
+    parameters:
+      service: hana
+      service-plan: hdi-shared
+  - name: pocsimplecappackage-auth
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      path: ./xs-security.json
+      config:
+        xsappname: pocsimplecappackage-${org}-${space}
+        tenant-mode: dedicated

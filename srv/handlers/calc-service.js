@@ -8,16 +8,16 @@ module.exports = class CalcService extends cds.ApplicationService {
       const { number1, number2, operation } = req.data
       switch (operation) {
         case "+":
-          return number1 + number2
+          return "Result Version 2: " + (number1 + number2)
           break
         case "-":
-          return number1 - number2
+          return "Result Version 2: " + (number1 - number2)
           break
         case "*":
-          return number1 * number2
+          return "Result Version 2: " + (number1 * number2)
           break
         case "/":
-          return number1 / number2
+          return "Result Version 2: " + (number1 / number2)
           break
       }
     })
