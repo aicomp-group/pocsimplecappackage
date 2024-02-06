@@ -1,7 +1,7 @@
 {
   "name": "@aicomp-group/pocsimplecappackage",
-  "version": "1.0.0",
-  "description": "A simple CAP project.",
+  "version": "2.0.0",
+  "description": "A simple CAP project. V2",
   "repository": "<Add your repository here>",
   "license": "UNLICENSED",
   "private": false,
@@ -9,13 +9,23 @@
     "@aicomp-group:registry": "https://npm.pkg.github.com"
   },
   "dependencies": {
-    "@sap/cds": "^7",
-    "express": "^4"
+    "@sap/cds": "^7.6.1",
+    "@sap/xssec": "^3",
+    "express": "^4",
+    "passport": "^0"
   },
   "devDependencies": {
-    "@cap-js/sqlite": "^1"
+    "@cap-js/sqlite": "^1",
+    "@sap/cds-dk": "^7"
   },
   "scripts": {
     "start": "cds-serve"
+  },
+  "cds": {
+    "requires": {
+      "[production]": {
+        "auth": "xsuaa"
+      }
+    }
   }
 }
